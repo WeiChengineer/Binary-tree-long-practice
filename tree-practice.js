@@ -50,13 +50,15 @@ function findMaxBT (rootNode) {
 }
 
 function getHeight (rootNode) {
-  if (!rootNode) return -1;
-  if (!rootNode.left && !rootNode.right) return 0
-  let left = getHeight(rootNode.left);
-  let right = getHeight(rootNode.right);
-  if (left > right) return left + 1
-  else return right + 1
+  // if (!rootNode) return -1;
+  // if (!rootNode.left && !rootNode.right) return 0
+  // let left = getHeight(rootNode.left);
+  // let right = getHeight(rootNode.right);
+  // if (left > right) return left + 1
+  // else return right + 1
   // Your code here
+  if (!rootNode) return -1;
+  return 1 + Math.max(getHeight(rootNode.left), getHeight(rootNode.right))
 }
 
 function balancedTree (rootNode) {
@@ -89,21 +91,23 @@ function countNodes (rootNode) {
   // Your code here
 }
 
-function getParentNode (rootNode, target) {
-  if (rootNode.val === target) return null;
-  const queue = [rootNode];
-  while (queue.length) {
-    let node = queue.shift();
-    if (node.left) queue.push(node.left)
-    if (node.right) queue.push(node.right)
-    if (queue.filter(ele => (ele.val === target))[0]) return node;
-  }
-  // Your code here
+function getParentNode (rootNode, target, parent = null) {
+  // if (rootNode.val === target) return null;
+  // const queue = [rootNode];
+  // while (queue.length) {
+  //   let node = queue.shift();
+  //   if (node.left) queue.push(node.left)
+  //   if (node.right) queue.push(node.right)
+  //   if (queue.filter(ele => (ele.val === target))[0]) return node;
+  // }
+  if (!rootNode) return undefined;
+  if (rootNode.val === target) return parent;
+  return getParentNode(rootNode.left, target, rootNode) || getParentNode(rootNode.right, target, rootNode);
 }
 
 function inOrderPredecessor (rootNode, target) {
-  let curr = rootNode;
   let stack = [];
+  let curr = rootNode;
   let predecessor = null;
 
   while (true) {
@@ -122,8 +126,24 @@ function inOrderPredecessor (rootNode, target) {
     }
     else break;
   }
-  // Your code here
 }
+  
+
+//   while (rootNode || stack.length) {
+//     while (rootNode) {
+//       stack.push(rootNode)
+//       rootNode = rootNode.left
+//     }
+//     rootNode = stack.pop();
+//     if (lastNode && lastNode.val === target) {
+//       if (!rootNode) return null;
+//       return rootNode.val;
+//     }
+//     lastNode = rootNode;
+//     if (rootNode) rootNode = rootNode.right;
+//   }
+//   return null;
+// }
 
 function deleteNodeBST(rootNode, target) {
   let parent = getParentNode(rootNode, target) 
