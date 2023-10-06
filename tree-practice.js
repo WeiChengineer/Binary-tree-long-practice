@@ -60,20 +60,27 @@ function getHeight (rootNode) {
 }
 
 function balancedTree (rootNode) {
-  if (!rootNode) return true
-  let stack = [rootNode]
-  while (stack.length) {
-    let curr = stack.pop()
-    let left = getHeight(curr.left)
-    let right = getHeight(curr.right)
-    if (Math.abs(left - right) <= 1) {
-      if (curr.left) stack.push(curr.left)
-      if (curr.right) stack.push(curr.right)
-    }
-  else return false;
-  }
-  return true;
-  // Your code here
+  // if (!rootNode) return true
+  // let stack = [rootNode]
+  // while (stack.length) {
+  //   let curr = stack.pop()
+  //   let left = getHeight(curr.left)
+  //   let right = getHeight(curr.right)
+  //   if (Math.abs(left - right) <= 1) {
+  //     if (curr.left) stack.push(curr.left)
+  //     if (curr.right) stack.push(curr.right)
+  //   }
+  // else return false;
+  // }
+  // return true;
+  // // Your code here
+
+  if (!rootNode) return true;
+
+  const leftHeight = getHeight(rootNode.left);
+  const rightHeight = getHeight(rootNode.right);
+
+  return Math.abs(leftHeight - rightHeight) <= 1 && balancedTree(rootNode.left) && balancedTree(rootNode.right);
 }
 
 function countNodes (rootNode) {
