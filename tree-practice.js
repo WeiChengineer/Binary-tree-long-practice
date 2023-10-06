@@ -110,7 +110,7 @@ function inOrderPredecessor (rootNode, target) {
   let curr = rootNode;
   let predecessor = null;
 
-  while (true) {
+  while (rootNode) {
     if (curr) {
       stack.push(curr)
       curr = curr.left
@@ -128,7 +128,8 @@ function inOrderPredecessor (rootNode, target) {
   }
 }
   
-
+// let stack = [];
+// let lastNode = null;
 //   while (rootNode || stack.length) {
 //     while (rootNode) {
 //       stack.push(rootNode)
@@ -136,13 +137,13 @@ function inOrderPredecessor (rootNode, target) {
 //     }
 //     rootNode = stack.pop();
 //     if (lastNode && lastNode.val === target) {
-//       if (!rootNode) return null;
-//       return rootNode.val;
+//       if (!lastNode) return null;
+//       return lastNode.val;
 //     }
 //     lastNode = rootNode;
-//     if (rootNode) rootNode = rootNode.right;
+//     rootNode = rootNode.right;
 //   }
-//   return null;
+//   
 // }
 
 function deleteNodeBST(rootNode, target) {
